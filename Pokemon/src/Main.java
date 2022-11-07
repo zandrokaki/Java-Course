@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -125,7 +124,7 @@ public class Main {
                             if(opcion.equals("Y"))
                             {
                                 team.add(enemy);
-                                System.out.println(enemy.toString() + " has been added to your team!");
+                                System.out.println(enemy.getName() + " has been added to your team!");
                             }  
                         }
                     }
@@ -156,7 +155,5 @@ public class Main {
             }
   
         }while(!opcion.equals("4"));
-       
-        //System.out.println(enemy.toString());
     }
 }
