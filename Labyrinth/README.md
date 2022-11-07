@@ -1,6 +1,6 @@
 ## Labyrinth
 
-A basic program that runs through a text file in the form of a labyrinth and finds its output by saving the path in a stack.
+A basic program that goes through a text file with the form of a labyrinth, finds its exit and save the path in a stack.
 
 Developed together with Miguel Reyes and Oscar Marín
 
