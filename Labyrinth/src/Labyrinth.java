@@ -65,7 +65,8 @@ public class Labyrinth {
         return labyrinth[p.getX()][p.getY()] == ' ' || labyrinth[p.getX()][p.getY()] == 'S';
     }
 
-    public ArrayDeque<Position> findExit() {
+    public ArrayDeque<Position> findExit()
+    {
 
         while (currentPosition.getY() != finalPosition.getY() || currentPosition.getX() != finalPosition.getX())
         {
@@ -119,6 +120,7 @@ public class Labyrinth {
         System.out.println("\n");
     }
 
+
     public void checkLabyrinthWithPath(ArrayDeque<Position> path)
     {
         for(Position p : path){
@@ -128,12 +130,4 @@ public class Labyrinth {
 
     public Position getCurrentPosition() { return currentPosition; }
     public Position getFinalPosition() { return finalPosition; }
-
-
-
-
-
-
-    
-
 }
