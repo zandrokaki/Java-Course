@@ -1,6 +1,7 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+A basic program that simulates a Pokemon game.
+First, you have to select your first pokemon and then, you can train them and fight against wild pokemons. If you defeat them, you can catch them.
 
 ## Folder Structure
 

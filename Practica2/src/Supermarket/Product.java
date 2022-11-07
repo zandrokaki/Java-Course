@@ -3,25 +3,25 @@ package Supermarket;
 public class Product {
     private String name;
     private String brand;
-    private double prize;
+    private double price;
 
     public Product()
     {
         name = "Unknown";
         brand = "Unknown";
-        prize = 0.0;
+        price = 0.0;
     }
 
-    public Product(String name, String brand, double prize)
+    public Product(String name, String brand, double price)
     {
         this.name = name;
         this.brand = brand;
-        this.prize = prize;
+        this.price = price;
     }
 
     @Override
     public String toString()
     {
-        return name + " " + brand + " " + prize;
+        return name + " " + brand + " " + price;
     }
 }
