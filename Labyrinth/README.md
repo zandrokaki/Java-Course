@@ -1,6 +1,8 @@
-## Getting Started
+## Labyrinth
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+A basic program that runs through a text file in the form of a labyrinth and finds its output by saving the path in a stack.
+
+Developed together with Miguel Reyes and Oscar Marín
 
 ## Folder Structure
 
