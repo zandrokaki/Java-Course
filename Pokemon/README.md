@@ -1,7 +1,7 @@
 ## Getting Started
 
 A basic program that simulates a Pokemon game.
-First, you have to select your first pokemon and then, you can train them and fight against wild pokemons. If you defeat them, you can catch them.
+First, you have to select your first pokemon and then, you can train them and fight against wild pokemons. If you defeat them, you can add them to your team.
 
 ## Folder Structure
 
