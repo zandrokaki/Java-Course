@@ -13,7 +13,7 @@ public class Labyrinth {
     public Labyrinth()
     {
         try{
-            File myObj = new File("C:\\Users\\ssanch15\\Desktop\\Labyrinth\\lab5.txt");
+            File myObj = new File("C:\\Users\\ssanch15\\Desktop\\Java-Course\\Labyrinth\\lab5.txt");
             Scanner myReader = new Scanner(myObj);
             path = new ArrayDeque<Position>();
             currentPosition = new Position();
@@ -45,7 +45,7 @@ public class Labyrinth {
             myReader.close();
         
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            System.out.println("File not found.");
             e.printStackTrace();
         }
     }
