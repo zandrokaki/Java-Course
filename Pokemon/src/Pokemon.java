@@ -1,5 +1,5 @@
 import java.text.DecimalFormat;
-import java.util.Random;
+//import java.util.Random;
 
 public class Pokemon {
     private String name;
@@ -10,8 +10,7 @@ public class Pokemon {
     private double strength;
     private double health;
 
-    public Pokemon(int id, String name, Type type, double strength, double health)
-    {
+    public Pokemon(int id, String name, Type type, double strength, double health) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -22,8 +21,7 @@ public class Pokemon {
         this.evolLevel2 = 1000;
     }
 
-    public Pokemon(int id, String name, Type type, double strength, double health, int evolLevel1)
-    {
+    public Pokemon(int id, String name, Type type, double strength, double health, int evolLevel1) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -35,9 +33,8 @@ public class Pokemon {
         this.evolLevel2 = 32;
     }
 
-    public void evolve(String evolName)
-    {
-        strength*=2;
+    public void evolve(String evolName) {
+        strength *= 2;
         ++id;
 
         System.out.println("##############################################");
@@ -46,25 +43,20 @@ public class Pokemon {
         this.name = evolName;
     }
 
-
-    public void levelUp(String evolName)
-    {
+    public void levelUp(String evolName) {
         ++level;
-        strength*=1.2;
-        health*=1.2;
+        strength *= 1.2;
+        health *= 1.2;
 
-        if(level == evolLevel1 || level == evolLevel2)
-        {
+        if (level == evolLevel1 || level == evolLevel2) {
             evolve(evolName);
         }
     }
 
-    public String getAttackName(Type type)
-    {
+    public String getAttackName(Type type) {
         String attack = null;
 
-        switch(type)
-        {
+        switch (type) {
             case FIRE:
                 attack = "FLARE";
                 break;
@@ -72,7 +64,7 @@ public class Pokemon {
             case WATER:
                 attack = "HYDRO-PUMP";
                 break;
-            
+
             case GRASS:
                 attack = "SOLAR BEAM";
                 break;
@@ -84,8 +76,7 @@ public class Pokemon {
         return attack;
     }
 
-    public boolean toCombat(Pokemon enemy, String evolName)
-    {
+    public boolean toCombat(Pokemon enemy, String evolName) {
         DecimalFormat df = new DecimalFormat("###.##");
         boolean result = false;
         double combatStrength = checkStrengthByType(enemy);
@@ -96,21 +87,20 @@ public class Pokemon {
 
         System.out.println("Player:  " + this.toString() + " VS " + enemy.toString());
 
-        while(playerHP > 0 && enemyHP > 0)
-        {
-            playerHP-=enemyStrength;
-            System.out.println("Enemy " + enemy.getName() + " used " + enemyAttack + ", inflicts " + df.format(enemyStrength) + " of damage.");
-          
-            enemyHP-=combatStrength;
-            System.out.println("Your " + this.getName() + " used " + playerAttack + ", inflicts " + df.format(combatStrength) + " of damage.");
+        while (playerHP > 0 && enemyHP > 0) {
+            playerHP -= enemyStrength;
+            System.out.println("Enemy " + enemy.getName() + " used " + enemyAttack + ", inflicts "
+                    + df.format(enemyStrength) + " of damage.");
+
+            enemyHP -= combatStrength;
+            System.out.println("Your " + this.getName() + " used " + playerAttack + ", inflicts "
+                    + df.format(combatStrength) + " of damage.");
         }
 
-        if(playerHP <= 0)
-        {
+        if (playerHP <= 0) {
             result = false;
             System.out.println("You lost");
-        }else
-        {
+        } else {
             result = true;
             levelUp(evolName);
             System.out.println("You win, " + this.name + "'s level has increased to level " + this.level);
@@ -119,37 +109,34 @@ public class Pokemon {
         return result;
     }
 
-    public double checkStrengthByType(Pokemon enemy)
-    {
+    public double checkStrengthByType(Pokemon enemy) {
         double combatStrength = this.strength;
 
-        switch(this.type)
-        {
+        switch (this.type) {
             case FIRE:
-                
-                if(enemy.getType() == Type.WATER || enemy.getType() == Type.FIRE)
-                    combatStrength/=2;
-                else if(enemy.getType() == Type.GRASS)
-                    combatStrength*=2;
+
+                if (enemy.getType() == Type.WATER || enemy.getType() == Type.FIRE)
+                    combatStrength /= 2;
+                else if (enemy.getType() == Type.GRASS)
+                    combatStrength *= 2;
 
                 break;
 
             case GRASS:
 
-                if(enemy.getType() == Type.FIRE || enemy.getType() == Type.GRASS)
-                    combatStrength/=2;
-                else if(enemy.getType() == Type.WATER)
-                    combatStrength*=2;
+                if (enemy.getType() == Type.FIRE || enemy.getType() == Type.GRASS)
+                    combatStrength /= 2;
+                else if (enemy.getType() == Type.WATER)
+                    combatStrength *= 2;
 
-                break; 
-                
+                break;
 
             case WATER:
 
-                if(enemy.getType() == Type.GRASS || enemy.getType() == Type.WATER)
-                    combatStrength/=2;
-                else if(enemy.getType() == Type.FIRE)
-                    combatStrength*=2;
+                if (enemy.getType() == Type.GRASS || enemy.getType() == Type.WATER)
+                    combatStrength /= 2;
+                else if (enemy.getType() == Type.FIRE)
+                    combatStrength *= 2;
 
                 break;
 
@@ -160,36 +147,56 @@ public class Pokemon {
         return combatStrength;
     }
 
-    public void toTrain(String evolname)
-    {
-        Random random = new Random();
-        int success = random.nextInt(10);
+    public void toTrain(String evolname) {
+        // Random random = new Random();
+        // int success = random.nextInt(10);
         levelUp(evolname);
-        System.out.println("Training was succesfull, "+ this.getName() + "'s level has increased to level " + this.level);
+        System.out.println(
+                "Training was succesfull, " + this.getName() + "'s level has increased to level " + this.level);
 
-       /*if(success%2==0)
-        {
-            levelUp(evolname);
-            System.out.println("Training was succesfull, "+ this.getName() + "'s level has increased to level " + this.level);
-        }else
-        {
-            System.out.println("Training failed!");
-        }*/
+        /*
+         * if(success%2==0)
+         * {
+         * levelUp(evolname);
+         * System.out.println("Training was succesfull, "+ this.getName() +
+         * "'s level has increased to level " + this.level);
+         * }else
+         * {
+         * System.out.println("Training failed!");
+         * }
+         */
 
     }
 
-    public double getStrength() { return strength; }
-    public double getHP() { return health; }
-    public Type getType() { return type; }
-    public int getId() { return id; }
-    public String getName(){ return name; }
-    public void setHP(double health) { this.health = health; }
-    
+    public double getStrength() {
+        return strength;
+    }
+
+    public double getHP() {
+        return health;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setHP(double health) {
+        this.health = health;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         DecimalFormat df = new DecimalFormat("###.##");
-        return "["+ name + ", LVL: " + level +" , " + type + " , HP: " +  df.format(health) + " , ST: " +  df.format(strength) + "]";
+        return "[" + name + ", LVL: " + level + " , " + type + " , HP: " + df.format(health) + " , ST: "
+                + df.format(strength) + "]";
     }
 
 }
