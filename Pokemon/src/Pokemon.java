@@ -141,7 +141,8 @@ public class Pokemon {
                 else if(enemy.getType() == Type.WATER)
                     combatStrength*=2;
 
-                break;
+                break; 
+                
 
             case WATER:
 

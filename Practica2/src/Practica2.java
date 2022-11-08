@@ -2,6 +2,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+import Calculator.Add;
+import Calculator.Divide;
 import Supermarket.Product;
 import Supermarket.Supermarket;
 
@@ -174,6 +176,11 @@ public class Practica2 {
     
     // --------------------------------------- MAIN -----------------------------------------------
     public static void main(String[] args) {
+        Add addop = new Add();
+        Divide divop = new Divide();
+        
+        System.out.println("Add: " + addop.operate(20, 49));
+        System.out.println("Divide: " + divop.operate(56, 0));
         //System.out.println(romanToDecimal("V"));
         //System.out.println(daysCounter("12/09/2022", "20/09/2022"));
         //Rectangle rectangle = new Rectangle(20.3, 10.5);
@@ -192,8 +199,8 @@ public class Practica2 {
             System.out.println(sp.getProduct(i));
         }*/
 
-        Calculator c = new Calculator();
+        //Calculator c = new Calculator();
 
-        System.out.println(c.operate(4,70, '-'));
+        //System.out.println(c.operate(4,70, '-'));
     }
 }
