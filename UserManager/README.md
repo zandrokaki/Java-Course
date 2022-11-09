@@ -1,6 +1,6 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+User Manager is a program in which you can create new users, log in with them and send messages to another registered user. You can set your email or password and check your new messages in your inbox
 
 ## Folder Structure
 

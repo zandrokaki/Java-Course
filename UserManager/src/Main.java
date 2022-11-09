@@ -10,9 +10,9 @@ public class Main {
     }
 
     private static void printLoggedMenu(String userlogged) {
-        System.out.println("-----------------" + userlogged + "'s dashboard -----------------");
+        System.out.println("----------------- " + userlogged + "'s dashboard -----------------");
         System.out.println("Select an option: ");
-        System.out.println("1 - Set Security Question");
+        //System.out.println("1 - Set Security Question");
         System.out.println("2 - Set Password");
         System.out.println("3 - Set Email");
         System.out.println("4 - Read my messages");
