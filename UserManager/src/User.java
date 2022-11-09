@@ -1,17 +1,18 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
     private String name;
     private String password;
     private String email;
-    private ArrayList <String> messages;
+    private HashMap<String, ArrayList<String>> messages;
 
     public User(String name, String password, String email)
     {
         this.name = name;
         this.password = password;
         this.email = email;
-        messages = new ArrayList<>();
+        this.messages = new HashMap<>();
     }
 
     public String toString()
@@ -22,11 +23,10 @@ public class User {
     public String getName() { return name; }
     public String getPassword() { return password; }
     public String getEmail() { return email; }
-    public ArrayList<String> getMessages() { return this.messages; }
+    public HashMap<String, ArrayList<String>> getMessages() { return this.messages; }
 
     public void setName(String name) { this.name = name; }
     public void setPassword(String password) { this.password = password; }
     public void setEmail(String email){ this.email = email; }
-
 
 }

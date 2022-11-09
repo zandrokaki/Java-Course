@@ -1,4 +1,4 @@
-import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 public class Main {
@@ -9,12 +9,15 @@ public class Main {
         System.out.println("3 - Exit");
     }
 
-    private static void printLoggedMenu() {
+    private static void printLoggedMenu(String userlogged) {
+        System.out.println("-----------------" + userlogged + "'s dashboard -----------------");
         System.out.println("Select an option: ");
         System.out.println("1 - Set Security Question");
         System.out.println("2 - Set Password");
         System.out.println("3 - Set Email");
-        System.out.println("4 - Log out");
+        System.out.println("4 - Read my messages");
+        System.out.println("5 - Send message");
+        System.out.println("6 - Log out");
     }
 
     public static void main(String[] args) throws Exception {
@@ -55,7 +58,7 @@ public class Main {
 
                     if (manager.logIn()) {
                         do {
-                            printLoggedMenu();
+                            printLoggedMenu(manager.getUserLogged().getName());
 
                             option = sc.nextLine();
 
@@ -65,7 +68,7 @@ public class Main {
                                     password = sc.nextLine();
 
                                     manager.getUserLogged().setPassword(password);
-                                    // System.out.println(manager.getUsers().toString());
+
                                     break;
 
                                 case "3":
@@ -77,18 +80,29 @@ public class Main {
                                     break;
 
                                 case "4":
-                                    manager.getMyMessages();
+                                    System.out.println(manager.getMyMessages());
                                     break;
 
                                 case "5":
-                                    manager.sendMessage();
+
+                                    System.out.println("Enter your destination (Username):");
+                                    option = sc.nextLine();
+
+                                    User destination = manager.getUsers().get(option);
+
+                                    System.out.println("Enter the message:");
+
+                                    option = sc.nextLine();
+
+                                    manager.sendMessage(destination, option);
+
                                     break;
 
                                 case "6":
                                     manager.logOut();
                                     break;
                             }
-                        } while (!option.equals("4"));
+                        } while (!option.equals("6"));
                     }
 
                     break;
