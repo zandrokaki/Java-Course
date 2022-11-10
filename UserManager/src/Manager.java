@@ -40,7 +40,45 @@ public class Manager {
         return login;
     }
 
+    public boolean logInWithQuestion() {
+        boolean login = false;
+        Scanner sc = new Scanner(System.in);
+        String answer, question, name;
+        User userLog;
+
+        System.out.println("Enter your username: ");
+        name = sc.nextLine();
+
+        if (userList.containsKey(name)){
+            userLog = userList.get(name);
+
+            if(!userLog.getQuestion().equals("")){
+                System.out.println(userLog.getQuestion());
+                answer = sc.nextLine();
+
+                if(answer.equals(userLog.getAnswer())){
+                    System.out.println(userLog.getName() + " logged succesfully \n");
+
+                    this.userLogged = userLog;
+                    login = true;
+
+                }else{
+                    System.out.println("Answer not valid, try again");
+                }
+            }else{
+                System.out.println("This user has not set a security question, unlucky");
+            }
+
+        }else if (!userList.containsKey(name)) {
+            System.out.println("This user doesn't exist \n");
+        }
+        
+
+        return login;
+    }
+
     public void registerUser(User userToRegister) {
+        
         // If the user didn't exist
         if (!userList.keySet().contains(userToRegister.getName())) {
             // Store it

@@ -6,45 +6,61 @@ public class TicketMachine {
     private int maxTickets;
     private int ticketsSold;
     private LocalDateTime today;
+    private String errorMessage;
 
     public TicketMachine()
     {
         this.maxTickets = 10;
         this.ticketsSold = 0;
-        LocalDateTime now = LocalDateTime.now();  
+        this.today = LocalDateTime.now();  
+        this.errorMessage = "";
     } 
 
     public TicketMachine(int maxTickets)
     {
         this.maxTickets = maxTickets;
         this.ticketsSold = 0;
-        LocalDateTime now = LocalDateTime.now();  
+        this.today = LocalDateTime.now();
+        this.errorMessage = ""; 
     }
 
-    public double sellTicket(double money)
+    public double sellTicket(double money, int amountTickets)
     {
-        if(!checkDate())
+        
+        if(isDifferentDay()){
             ticketsSold = 0;
-            
-        if(money > 4 && ticketsSold < maxTickets)
-        {
-           money-=4;
-           ++ticketsSold;
+            today = LocalDateTime.now();
         }
 
+        if(amountTickets > maxTickets-ticketsSold ){
+            errorMessage = "Run out of tickets.";
+            return money;
+        }
+           
+            
+        if(money == 4*amountTickets)
+        {
+           ticketsSold+=amountTickets;
+           return 0;
+        }
+
+        errorMessage= "Money not accurate.";
         return money;
     }
 
-    public boolean checkDate()
+
+
+    public boolean isDifferentDay()
     {
-        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
         LocalDateTime now = LocalDateTime.now();  
-        //System.out.println(dtf.format(today));
 
-        return now.equals(today);
-
+        return !(dtf.format(now).equals(dtf.format(today)));
     }
 
+    public String getErrorMessage(){
+        return errorMessage;
+    }
     
     
 }

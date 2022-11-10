@@ -19,17 +19,15 @@ public class Divide extends Operator {
         return operate(this.op1, this.op2);
     }
 
-    public double operate(int x, int y)
+    public double operate(int x, int y) throws ArithmeticException
     {
         int result = 0;
 
-        try{
-            result = x/y;
-        }catch(ArithmeticException e)
-        {
-            System.out.println("Error: Division by zero");
-        }
+        if(y == 0)
+            throw new ArithmeticException("Error: Division by zero.");
 
+        result = x/y;
+ 
         return result;
     }
 }
