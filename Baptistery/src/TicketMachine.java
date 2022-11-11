@@ -1,66 +1,76 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class TicketMachine {
-
+    private static HashMap<LocalDate, Integer> datesMap;
     private int maxTickets;
-    private int ticketsSold;
-    private LocalDateTime today;
-    private String errorMessage;
+    
 
-    public TicketMachine()
+    public TicketMachine(ArrayList<LocalDate> dates)
     {
-        this.maxTickets = 10;
-        this.ticketsSold = 0;
-        this.today = LocalDateTime.now();  
-        this.errorMessage = "";
+        TicketMachine.datesMap = new HashMap<>();
+        maxTickets = 10;
+
+
+        for(LocalDate d : dates)
+            datesMap.put(d, maxTickets);
+       
     } 
 
-    public TicketMachine(int maxTickets)
+    /*
+     * TicketsMachine constructor 
+     * 
+     * @param maxTickets: set the number of tickets available per day
+     */
+    public TicketMachine(int maxTickets, ArrayList<LocalDate> dates)
     {
+       TicketMachine.datesMap = new HashMap<>();
         this.maxTickets = maxTickets;
-        this.ticketsSold = 0;
-        this.today = LocalDateTime.now();
-        this.errorMessage = ""; 
+        
+        for(LocalDate d : dates)
+            datesMap.put(d, maxTickets);
     }
 
-    public double sellTicket(double money, int amountTickets)
+    public double sellTicket(double money, int amountTickets, LocalDate date) throws Exception 
     {
+        int ticketsPerDay;
+
+        if(!datesMap.keySet().contains(date)){
+            //datesMap.put(date, maxTickets);
+            throw new Exception("Date not available.");
+        }
+
+        ticketsPerDay = datesMap.get(date);
+
+        if(ticketsPerDay <= 0 || amountTickets > maxTickets || ticketsPerDay-amountTickets < 0)
+            throw new Exception("Not enough tickets to complete your request. Tickets remaining for that day: " + ticketsPerDay);
+
+        if(money != 4*amountTickets)
+            throw new Exception("Money not accurate");
+
+        ticketsPerDay-=amountTickets;
+
+        datesMap.put(date, ticketsPerDay);
         
-        if(isDifferentDay()){
-            ticketsSold = 0;
-            today = LocalDateTime.now();
-        }
+        money-=4*amountTickets;
 
-        if(amountTickets > maxTickets-ticketsSold ){
-            errorMessage = "Run out of tickets.";
-            return money;
-        }
-           
-            
-        if(money == 4*amountTickets)
-        {
-           ticketsSold+=amountTickets;
-           return 0;
-        }
-
-        errorMessage= "Money not accurate.";
         return money;
     }
 
+    public String toString(){
+        StringBuilder result = new StringBuilder();
+       
+        datesMap.forEach(
+            (key, value) -> {
+                result.append(key.toString() + ", Tickets available: " + value);
+                result.append("\n");
+                
+            });
 
-
-    public boolean isDifferentDay()
-    {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
-        LocalDateTime now = LocalDateTime.now();  
-
-        return !(dtf.format(now).equals(dtf.format(today)));
+        return result.toString();  
     }
 
-    public String getErrorMessage(){
-        return errorMessage;
-    }
-    
-    
+    public HashMap<LocalDate, Integer> getDates() { return datesMap; }
 }

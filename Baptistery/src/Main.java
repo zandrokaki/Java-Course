@@ -1,4 +1,7 @@
-import java.util.InputMismatchException;
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -7,49 +10,65 @@ public class Main {
         System.out.println("2 - Exit");
     }
 
-    public static void main(String[] args) throws Exception {
-        TicketMachine machine = new TicketMachine();
+    public static void main(String[] args) {
+        ArrayList<LocalDate> dates = new ArrayList<>();
 
+        TicketMachine machine;
+        LocalDate dateToBuy;
+        String dateToBuyS;
         Scanner sc = new Scanner(System.in);
         int option = -1;
         int amountTickets;
         double money;
+
+        dates.add(LocalDate.parse("21-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        dates.add(LocalDate.parse("22-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        dates.add(LocalDate.parse("23-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        dates.add(LocalDate.parse("24-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+
+        machine = new TicketMachine(dates);
 
         System.out.println("Welcome to Tickets Machine");
 
         do {
 
             printMenu();
-            try {
 
-                option = sc.nextInt();
+            option = sc.nextInt();
 
-                switch (option) {
-                    case 1 -> {
+            switch (option) {
+                case 1 -> {
 
-                        System.out.println("Insert money:");
-                        money = sc.nextDouble();
+                    System.out.println("Enter the date you want (yyyy-mm-dd)");
+                    System.out.println(machine.toString());
 
-                        System.out.println("How many tickets do you want to buy?");
-                        amountTickets = sc.nextInt();
+                    dateToBuyS = sc.next();
 
-                        money = machine.sellTicket(money, amountTickets);
 
-                        if (money == 0)
-                            System.out.println("You bought " + amountTickets + " tickets.");
-                        else
-                            System.out.println(machine.getErrorMessage());
+                    System.out.println("Insert money:");
+                    money = sc.nextDouble();
+
+                    System.out.println("How many tickets do you want to buy?");
+                    amountTickets = sc.nextInt();
+
+                    dateToBuy = LocalDate.parse(dateToBuyS, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                    try{
+                        money = machine.sellTicket(money, amountTickets, dateToBuy);
+                    }catch(Exception e){
+                        System.out.println(e.getMessage());
                     }
 
-                    default -> {
-                        if (option != 2)
-                            System.out.println("Enter a correct number");
-                    }
+                    if (money == 0)
+                        System.out.println("You bought " + amountTickets + " tickets.");
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Enter a number");
-                sc.next();
+
+                default -> {
+                    if (option != 2)
+                        System.out.println("Enter a correct number");
+                }
             }
+           
 
         } while (option != 2);
 
