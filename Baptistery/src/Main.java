@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class Main {
         ArrayList<LocalDate> dates = new ArrayList<>();
 
         TicketMachine machine;
-        LocalDate dateToBuy;
+        LocalDate dateToBuy = null;
         String dateToBuyS;
         Scanner sc = new Scanner(System.in);
         int option = -1;
@@ -44,6 +43,14 @@ public class Main {
 
                     dateToBuyS = sc.next();
 
+                    try{
+                        dateToBuy = LocalDate.parse(dateToBuyS, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                    }catch(Exception e){
+                        System.out.println("Date or date format not valid, try again");
+                        break;
+                    }
+
 
                     System.out.println("Insert money:");
                     money = sc.nextDouble();
@@ -51,7 +58,8 @@ public class Main {
                     System.out.println("How many tickets do you want to buy?");
                     amountTickets = sc.nextInt();
 
-                    dateToBuy = LocalDate.parse(dateToBuyS, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    
+                    
 
                     try{
                         money = machine.sellTicket(money, amountTickets, dateToBuy);

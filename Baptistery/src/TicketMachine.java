@@ -38,7 +38,6 @@ public class TicketMachine {
         int ticketsPerDay;
 
         if(!datesMap.keySet().contains(date)){
-            //datesMap.put(date, maxTickets);
             throw new Exception("Date not available.");
         }
 
