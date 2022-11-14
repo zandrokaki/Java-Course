@@ -9,6 +9,10 @@ public class Main {
         System.out.println("2 - Exit");
     }
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
         ArrayList<LocalDate> dates = new ArrayList<>();
 
@@ -25,7 +29,7 @@ public class Main {
         dates.add(LocalDate.parse("23-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         dates.add(LocalDate.parse("24-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
-        machine = new TicketMachine(dates);
+        machine = TicketMachine.getInstance();
 
         System.out.println("Welcome to Tickets Machine");
 
@@ -45,21 +49,16 @@ public class Main {
 
                     try{
                         dateToBuy = LocalDate.parse(dateToBuyS, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-                    }catch(Exception e){
-                        System.out.println("Date or date format not valid, try again");
+                    }catch(IllegalArgumentException e){
+                        System.out.println("Date format not valid, try again");
                         break;
                     }
-
 
                     System.out.println("Insert money:");
                     money = sc.nextDouble();
 
                     System.out.println("How many tickets do you want to buy?");
                     amountTickets = sc.nextInt();
-
-                    
-                    
 
                     try{
                         money = machine.sellTicket(money, amountTickets, dateToBuy);
