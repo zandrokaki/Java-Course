@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void printMenu() {
         System.out.println("1 - Buy Tickets");
-        System.out.println("2 - Exit");
+        System.out.println("2 - Cancel Ticket");
+        System.out.println("3 - Exit");
     }
 
     
@@ -14,6 +14,7 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
+        CareTaker ct = new CareTaker();
         TicketMachine machine;
         LocalDate dateToBuy = null;
         String dateToBuyS;
@@ -21,8 +22,11 @@ public class Main {
         int option = -1;
         int amountTickets;
         double money;
+        Memento m1;
 
         machine = TicketMachine.getInstance();
+
+        ct.addMemento(machine.saveToMemento());
 
         System.out.println("Welcome to Tickets Machine");
 
@@ -59,18 +63,29 @@ public class Main {
                         System.out.println(e.getMessage());
                     }
 
-                    if (money == 0)
+                    if (money == 0){
                         System.out.println("You bought " + amountTickets + " tickets.");
+                        ct.addMemento(machine.saveToMemento());
+                    }
+
+                    //m1 = ct.getMemento(0);
+                    
+                    //System.out.println("Datos antiguos " + m1.getSavedData().toString());
+                }
+
+                case 2 -> {
+                    m1 = ct.getMemento(ct.getMementos().size()-2);
+                    machine.loadFromMemento(m1);
+                    //System.out.println("New Map: " + machine.getDates().toString());
                 }
 
                 default -> {
-                    if (option != 2)
+                    if (option != 3)
                         System.out.println("Enter a correct number");
                 }
             }
-           
 
-        } while (option != 2);
+        } while (option != 3);
 
         sc.close();
     }

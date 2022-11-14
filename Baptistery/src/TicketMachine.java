@@ -12,6 +12,14 @@ public class TicketMachine {
         maxTickets = 10;
     }
 
+    public Memento saveToMemento(){
+        return new Memento(datesMap);
+    }
+
+    public void loadFromMemento(Memento m){
+        datesMap = m.getSavedData();
+    }
+
     /** 
      * Gets the instance of TicketMachine
      * 
