@@ -26,8 +26,6 @@ public class Main {
 
         machine = TicketMachine.getInstance();
 
-        ct.addMemento(machine.saveToMemento());
-
         System.out.println("Welcome to Tickets Machine");
 
         do {
@@ -68,9 +66,6 @@ public class Main {
                         ct.addMemento(machine.saveToMemento());
                     }
 
-                    //m1 = ct.getMemento(0);
-                    
-                    //System.out.println("Datos antiguos " + m1.getSavedData().toString());
                 }
 
                 case 2 -> {
