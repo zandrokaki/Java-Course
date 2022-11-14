@@ -55,7 +55,7 @@ public class TicketMachine {
             throw new IllegalArgumentException("Date not available: Process cancelled.");
         }
 
-        if(!datesMap.keySet().contains(date)){
+        if(!datesMap.containsKey(date)){
             datesMap.put(date, maxTickets);
         }
        
