@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Main {
@@ -44,7 +45,7 @@ public class Main {
 
                     try{
                         dateToBuy = LocalDate.parse(dateToBuyS, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                    }catch(IllegalArgumentException e){
+                    }catch(DateTimeParseException e){
                         System.out.println("Date format not valid, try again");
                         break;
                     }
