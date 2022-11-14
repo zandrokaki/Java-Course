@@ -14,8 +14,6 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        ArrayList<LocalDate> dates = new ArrayList<>();
-
         TicketMachine machine;
         LocalDate dateToBuy = null;
         String dateToBuyS;
@@ -23,11 +21,6 @@ public class Main {
         int option = -1;
         int amountTickets;
         double money;
-
-        dates.add(LocalDate.parse("21-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        dates.add(LocalDate.parse("22-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        dates.add(LocalDate.parse("23-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        dates.add(LocalDate.parse("24-09-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         machine = TicketMachine.getInstance();
 
